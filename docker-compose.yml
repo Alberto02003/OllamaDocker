@@ -19,6 +19,8 @@ services:
       resources:
         limits:
           memory: 3G
+    networks:
+      - shared
 
   ollama-init:
     image: ollama/ollama:latest
@@ -46,6 +48,10 @@ services:
       - OLLAMA_HOST=http://ollama:11434
     command: >
       sh -c "npm install --production && node index.js"
+
+networks:
+  shared:
+    name: shared_network
 
 volumes:
   ollama_data:
